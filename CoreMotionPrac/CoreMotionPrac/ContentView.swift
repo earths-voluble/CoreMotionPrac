@@ -2,6 +2,39 @@
 import SwiftUI
 import CoreMotion
 
+// CMMotionManager
+class MotionManager: ObservableObject {
+    private var motionManager = CMMotionManager()
+    @Published var relativeAcceleration: CMAcceleration = .init()
+    
+    private var neutralAcceleration: CMAcceleration?
+    
+    init() {
+        startAccelerometers()
+    }
+    
+    private func startAccelerometers() {
+        guard motionManager.isAccelerometerAvailable else { return }
+        let maxScreenRefreshRate = UIScreen.main.maximumFramesPerSecond // max 주사율
+        motionManager.accelerometerUpdateInterval = 1.0 / Double(maxScreenRefreshRate) // 기기별 주사율에 따른 가속도 갱신
+        motionManager.startAccelerometerUpdates(to: .main) { [weak self] (data, error) in
+            guard let data = data else { return }
+            
+            if let neutral = self?.neutralAcceleration {
+                // 기기의 현재 가속도계 값 계산
+                self?.relativeAcceleration = CMAcceleration(
+                    x: data.acceleration.x - neutral.x,
+                    y: data.acceleration.y - neutral.y,
+                    z: data.acceleration.z - neutral.z
+                )
+            } else {
+                // 현재 가속도계 값을 중립으로
+                self?.neutralAcceleration = data.acceleration
+            }
+        }
+    }
+}
+
 struct ContentView: View {
     @State var motion: CMDeviceMotion? = nil
     let motionManager = CMMotionManager()
@@ -81,13 +114,16 @@ struct ContentView: View {
         }
         .onAppear {
             if motionManager.isDeviceMotionAvailable {
-                self.motionManager.deviceMotionUpdateInterval = 1.0 / 60.0
+                let maxScreenRefreshRate = UIScreen.main.maximumFramesPerSecond // max 주사율
+                print(maxScreenRefreshRate)
+                
+                self.motionManager.accelerometerUpdateInterval = 1.0 / Double(maxScreenRefreshRate) // 기기별 주사율에 따른 가속도 갱신
                 self.motionManager.startDeviceMotionUpdates(to: OperationQueue.main) { (data, error) in
                     if let validData = data {
                         self.motion = validData
                     }
                 }
-            }
+            } else { return }
             
         }
         
