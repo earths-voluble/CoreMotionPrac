@@ -8,17 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		895B150D2B57DD0100B9320E /* CoreMotionPracApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895B150C2B57DD0100B9320E /* CoreMotionPracApp.swift */; };
-		895B150F2B57DD0100B9320E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895B150E2B57DD0100B9320E /* ContentView.swift */; };
+		895B150F2B57DD0100B9320E /* ParallaxCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895B150E2B57DD0100B9320E /* ParallaxCard.swift */; };
 		895B15112B57DD0300B9320E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 895B15102B57DD0300B9320E /* Assets.xcassets */; };
 		895B15142B57DD0300B9320E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 895B15132B57DD0300B9320E /* Preview Assets.xcassets */; };
+		895B151B2B57F36200B9320E /* CoreMotionPracticeMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895B151A2B57F36200B9320E /* CoreMotionPracticeMainView.swift */; };
+		895B151D2B57F75D00B9320E /* MotionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895B151C2B57F75D00B9320E /* MotionInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		895B15092B57DD0100B9320E /* CoreMotionPrac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreMotionPrac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		895B150C2B57DD0100B9320E /* CoreMotionPracApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionPracApp.swift; sourceTree = "<group>"; };
-		895B150E2B57DD0100B9320E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		895B150E2B57DD0100B9320E /* ParallaxCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallaxCard.swift; sourceTree = "<group>"; };
 		895B15102B57DD0300B9320E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		895B15132B57DD0300B9320E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		895B151A2B57F36200B9320E /* CoreMotionPracticeMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionPracticeMainView.swift; sourceTree = "<group>"; };
+		895B151C2B57F75D00B9320E /* MotionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +56,9 @@
 			isa = PBXGroup;
 			children = (
 				895B150C2B57DD0100B9320E /* CoreMotionPracApp.swift */,
-				895B150E2B57DD0100B9320E /* ContentView.swift */,
+				895B151A2B57F36200B9320E /* CoreMotionPracticeMainView.swift */,
+				895B150E2B57DD0100B9320E /* ParallaxCard.swift */,
+				895B151C2B57F75D00B9320E /* MotionInfo.swift */,
 				895B15102B57DD0300B9320E /* Assets.xcassets */,
 				895B15122B57DD0300B9320E /* Preview Content */,
 			);
@@ -137,8 +143,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				895B150F2B57DD0100B9320E /* ContentView.swift in Sources */,
+				895B150F2B57DD0100B9320E /* ParallaxCard.swift in Sources */,
+				895B151D2B57F75D00B9320E /* MotionInfo.swift in Sources */,
 				895B150D2B57DD0100B9320E /* CoreMotionPracApp.swift in Sources */,
+				895B151B2B57F36200B9320E /* CoreMotionPracticeMainView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

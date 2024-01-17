@@ -5,7 +5,7 @@ import SwiftUI
 struct CoreMotionPracApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            CoreMotionPracticeMainView()
         }
     }
 }

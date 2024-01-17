@@ -35,9 +35,11 @@ class MotionManager: ObservableObject {
     }
 }
 
-struct ContentView: View {
+struct ParallaxCard: View {
+    @ObservedObject var motionManager = MotionManager()
+    
     @State var motion: CMDeviceMotion? = nil
-    let motionManager = CMMotionManager()
+//    let motionManager = CMMotionManager()
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 20, style: .continuous)
@@ -48,88 +50,70 @@ struct ContentView: View {
             RoundedRectangle(cornerRadius: 20, style: .continuous)
                 .frame(width: 250, height: 250)
                 .foregroundStyle(Color.gray)
-                .offset(
-                    x: motion != nil ? CGFloat(motion!.gravity.x * 20) : 0,
-                    y: motion != nil ? CGFloat(-motion!.gravity.y * 20) : 0)
+                .offset(x: motionManager.relativeAcceleration.x * 10, y: motionManager.relativeAcceleration.y * 10)
                 .rotation3DEffect(
                     motion != nil ? .degrees(Double(motion!.attitude.pitch) * 5 / .pi) : .degrees(0),
                     axis: (
-                        x: motion != nil ? -motion!.gravity.y : 0,
-                        y: motion != nil ? motion!.gravity.x : 0, z: 0))
+                        x: motionManager.relativeAcceleration.x, y: motionManager.relativeAcceleration.y, z: 0))
                 .shadow(color: .black.opacity(0.3),
                         radius: 1,
-                        x: motion != nil ? CGFloat(-motion!.gravity.y * 3) : 0,
-                        y: motion != nil ? CGFloat(motion!.gravity.x * 3) : 0)
+                        x: motionManager.relativeAcceleration.x * 5, y: motionManager.relativeAcceleration.y * 5)
             
             
             RoundedRectangle(cornerRadius: 20, style: .continuous)
                 .frame(width: 200, height: 200)
                 .foregroundStyle(Color.black)
-                .offset(
-                    x: motion != nil ? CGFloat(motion!.gravity.x * 27) : 0,
-                    y: motion != nil ? CGFloat(-motion!.gravity.y * 27) : 0)
+                .offset(x: motionManager.relativeAcceleration.x * 15, y: motionManager.relativeAcceleration.y * 15)
                 .rotation3DEffect(
                     motion != nil ? .degrees(Double(motion!.attitude.pitch) * 5 / .pi) : .degrees(0),
                     axis: (
-                        x: motion != nil ? -motion!.gravity.y : 0,
-                        y: motion != nil ? motion!.gravity.x : 0, z: 0))
+                        x: motionManager.relativeAcceleration.x, y: motionManager.relativeAcceleration.y, z: 0))
                 .shadow(color: .black.opacity(0.35),
                         radius: 1,
-                        x: motion != nil ? CGFloat(-motion!.gravity.y * 5) : 0,
-                        y: motion != nil ? CGFloat(motion!.gravity.x * 5) : 0)
+                        x: motionManager.relativeAcceleration.x * 7, y: motionManager.relativeAcceleration.y * 7)
             
             RoundedRectangle(cornerRadius: 20, style: .continuous)
                 .frame(width: 140, height: 140)
                 .foregroundStyle(Color.white)
-                .offset(
-                    x: motion != nil ? CGFloat(motion!.gravity.x * 40) : 0,
-                    y: motion != nil ? CGFloat(-motion!.gravity.y * 40) : 0)
+                .offset(x: motionManager.relativeAcceleration.x * 20, y: motionManager.relativeAcceleration.y * 20)
                 .rotation3DEffect(
                     motion != nil ? .degrees(Double(motion!.attitude.pitch) * 5 / .pi) : .degrees(0),
                     axis: (
-                        x: motion != nil ? -motion!.gravity.y : 0,
-                        y: motion != nil ? motion!.gravity.x : 0, z: 0))
+                        x: motionManager.relativeAcceleration.x, y: motionManager.relativeAcceleration.y, z: 0))
                 .shadow(color: .black.opacity(0.5),
                         radius: 1,
-                        x: motion != nil ? CGFloat(-motion!.gravity.y * 7) : 0,
-                        y: motion != nil ? CGFloat(motion!.gravity.x * 7) : 0)
+                        x: motionManager.relativeAcceleration.x * 9, y: motionManager.relativeAcceleration.y * 9)
             
                 .overlay(alignment: .bottom) {
-                    Image(systemName: "person").resizable().scaledToFit()
-                        .offset(
-                            x: motion != nil ? CGFloat(motion!.gravity.x * 40) : 0,
-                            y: motion != nil ? CGFloat(-motion!.gravity.y * 40) : 0)
+                    Image(systemName: "apple.logo").resizable().scaledToFit()
+                        .offset(x: motionManager.relativeAcceleration.x * 25, y: motionManager.relativeAcceleration.y * 25)
                         .rotation3DEffect(
                             motion != nil ? .degrees(Double(motion!.attitude.pitch) * 5 / .pi) : .degrees(0),
                             axis: (
-                                x: motion != nil ? -motion!.gravity.y : 0,
-                                y: motion != nil ? motion!.gravity.x : 0, z: 0))
+                                x: motionManager.relativeAcceleration.x, y: motionManager.relativeAcceleration.y, z: 0))
                         .shadow(color: .black.opacity(0.5),
                                 radius: 1,
-                                x: motion != nil ? CGFloat(-motion!.gravity.x * 9) : 0,
-                                y: motion != nil ? CGFloat(motion!.gravity.y * 9) : 0)
-                    
-                    
+                                x: motionManager.relativeAcceleration.x * 11, y: motionManager.relativeAcceleration.y * 11)
                 }
         }
-        .onAppear {
-            if motionManager.isDeviceMotionAvailable {
-                let maxScreenRefreshRate = UIScreen.main.maximumFramesPerSecond // max 주사율
-                print(maxScreenRefreshRate)
-                
-                self.motionManager.accelerometerUpdateInterval = 1.0 / Double(maxScreenRefreshRate) // 기기별 주사율에 따른 가속도 갱신
-                self.motionManager.startDeviceMotionUpdates(to: OperationQueue.main) { (data, error) in
-                    if let validData = data {
-                        self.motion = validData
-                    }
-                }
-            } else { return }
-            
-        }
+//        .onAppear {
+//            if motionManager.isDeviceMotionAvailable {
+//                let maxScreenRefreshRate = UIScreen.main.maximumFramesPerSecond // max 주사율
+//                print(maxScreenRefreshRate)
+//                
+//                self.motionManager.accelerometerUpdateInterval = 1.0 / Double(maxScreenRefreshRate) // 기기별 주사율에 따른 가속도 갱신
+//                self.motionManager.startDeviceMotionUpdates(to: OperationQueue.main) { (data, error) in
+//                    if let validData = data {
+//                        self.motion = validData
+//                    }
+//                }
+//            } else { return }
+//            
+//        }
         
     }
 }
 
 #Preview {
-    ContentView()
+    ParallaxCard()
 }
